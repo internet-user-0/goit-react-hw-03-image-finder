@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import css from './ImageGaleryItem.module.css';
+import { InfinitySpin } from 'react-loader-spinner';
 
 class ImageGaleryItem extends Component {
    state = {
@@ -28,7 +29,11 @@ class ImageGaleryItem extends Component {
       const { arrayImage, loading } = this.state;
       return (
          <>
-            {loading && <li>загрузка</li>}
+            {loading && (
+               <li>
+                  <InfinitySpin width="200" color="#4fa94d" />
+               </li>
+            )}
             {arrayImage &&
                arrayImage.hits.map(({ id, webformatURL, largeImageURL }) => {
                   return (

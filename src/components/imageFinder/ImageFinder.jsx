@@ -23,11 +23,11 @@ class ImageFinder extends Component {
       this.setState({ img: largeImageURL, modal: true });
    };
 
-   toglModal = () => {
-      this.setState(({modal}) => ({
-         modal: !modal,
-      }) )
-   }
+   closeModal = () => {
+      this.setState(() => ({
+         modal: false,
+      }));
+   };
 
    formSubmit = name => {
       this.setState({ name, page: 12 });
@@ -47,7 +47,7 @@ class ImageFinder extends Component {
                />
             </ImageGalery>
             {this.state.modal && (
-               <Modal modalClose={this.toglModal}>
+               <Modal modalClose={this.closeModal}>
                   <img src={this.state.img} alt="asd" />
                </Modal>
             )}
