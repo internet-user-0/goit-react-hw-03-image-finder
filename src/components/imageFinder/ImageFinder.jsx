@@ -38,14 +38,12 @@ class ImageFinder extends Component {
          <div className={css.App}>
             <Searchbar onSubmit={this.formSubmit}></Searchbar>
 
-            <ImageGalery>
-               <ImageGaleryItem
-                  name={this.state.name}
-                  page={this.state.page}
-                  buttonMore={this.buttonMore}
-                  onModal={img => this.openModal(img)}
-               />
-            </ImageGalery>
+            <ImageGalery
+               name={this.state.name}
+               page={this.state.page}
+               buttonMore={this.buttonMore}
+               onModal={img => this.openModal(img)}
+            ></ImageGalery>
             {this.state.modal && (
                <Modal modalClose={this.closeModal}>
                   <img src={this.state.img} alt="asd" />

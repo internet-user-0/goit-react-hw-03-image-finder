@@ -15,11 +15,3 @@
    transform: scale(1.03);
    cursor: zoom-in;
 }
-
-.ImageGalleryItem__button{
-   display: flex;
-   justify-content: center;
-   width: 400%;
-   margin: 0 24px 0 24px;
-   
-}
