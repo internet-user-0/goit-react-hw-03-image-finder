@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Api from '../../services';
 import ImageGaleryItem from './ImageGalleryItem';
 import css from './ImageGalery.module.css';
 import Button from './Button';
+import { searchImages } from 'components/services';
 import { InfinitySpin } from 'react-loader-spinner';
 
 class ImageGalery extends Component {
@@ -13,41 +13,36 @@ class ImageGalery extends Component {
       img: null,
    };
 
-   getImages = arrayImage => {
-      this.setState({ arrayImage: arrayImage });
-   };
 
-   loading = load => {
-      this.setState({ loading: load });
-   };
+   componentDidUpdate = async (prevProps, prevState) => {
+      if (
+         prevProps.name !== this.props.name ||
+         prevProps.page !== this.props.page
+      )
+      this.setState({ loading: true })
+      this.setState({arrayImage: await searchImages(this.props.name, this.props.page), loading: false})
+   }
 
    render() {
       return (
          <>
-         <Api
-               name={this.props.name}
-               page={this.props.page}
-               getArrayImage={this.getImages}
-               loading={this.loading}
-            ></Api>
-            {this.state.loading && <InfinitySpin width="200" color="#4fa94d" />}
-
             <ul className={css.ImageGallery}>
                {this.state.arrayImage &&
-                  this.state.arrayImage.hits.map(
+                  this.state.arrayImage.map(
                      ({ id, webformatURL, largeImageURL }) => {
                         return (
                            <ImageGaleryItem
                               onModal={(img) => {this.props.onModal(img)}}
-                              id={id}
+                              key={id}
                               webformatURL={webformatURL}
                               largeImageURL={largeImageURL}
                            />
-                        );
+                        )
                      }
                   )}
             </ul>
-            {this.state.arrayImage && this.state.arrayImage.hits.length !== 0 && (
+            {this.state.loading && <InfinitySpin width="200" color="#4fa94d" />}
+            {this.state.arrayImage && this.state.arrayImage.length !== 0 && (
                   <Button className={css.button} more={this.props.buttonMore} />
             )}
          </>

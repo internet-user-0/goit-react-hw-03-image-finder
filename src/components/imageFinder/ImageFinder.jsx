@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Searchbar from './parts/Searchbar';
 import ImageGalery from './parts/ImageGallery';
-import ImageGaleryItem from './parts/ImageGalleryItem';
 import css from './styles.module.css';
 import Modal from './parts/Modal';
 
@@ -9,6 +8,7 @@ class ImageFinder extends Component {
    state = {
       name: '',
       page: 12,
+      arrayImage: null,
       img: null,
       modal: false,
    };
@@ -29,8 +29,11 @@ class ImageFinder extends Component {
       }));
    };
 
-   formSubmit = name => {
-      this.setState({ name, page: 12 });
+   formSubmit = async name => {
+      this.setState({
+         name,
+         page: 12,
+      });
    };
 
    render() {
@@ -41,6 +44,7 @@ class ImageFinder extends Component {
             <ImageGalery
                name={this.state.name}
                page={this.state.page}
+               arrayImage={this.state.arrayImage}
                buttonMore={this.buttonMore}
                onModal={img => this.openModal(img)}
             ></ImageGalery>

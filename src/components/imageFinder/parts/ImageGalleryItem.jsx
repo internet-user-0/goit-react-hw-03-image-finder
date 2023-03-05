@@ -8,7 +8,7 @@ class ImageGaleryItem extends Component {
          <li
             className={css.ImageGalleryItem}
             onClick={() => {this.props.onModal(this.props.largeImageURL)}}
-            key={this.props.id}
+
          >
             <img
                className={css.ImageGalleryItem__image}

@@ -16,7 +16,7 @@ class Searchbar extends Component {
       e.preventDefault();
 
       if (this.state.name.trim() === '') {
-         alert('але нормально давай');
+         alert('enter image title');
          return;
       }
 
